@@ -4,12 +4,15 @@ import type { CountryCode, TierKey } from './engine/types'
 /**
  * 백분위 p → "total명 중 count명 안"의 숫자.
  * 1000명 기준으로 한 자릿수(1~9명)일 때만 1000명, 그 외에는 100명 기준.
+ * 100명 중 40명처럼 나누어떨어지면 10명 중 4명으로 줄인다.
  */
 export function topRatio(p: number): { total: number; count: number } {
   const top = 1 - p
   const perThousand = Math.round(top * 1000)
   if (perThousand < 10) return { total: 1000, count: Math.max(1, perThousand) }
-  return { total: 100, count: Math.round(top * 100) }
+  const perHundred = Math.round(top * 100)
+  if (perHundred % 10 === 0) return { total: 10, count: perHundred / 10 }
+  return { total: 100, count: perHundred }
 }
 
 /** "1000명 중 8명 안" */
