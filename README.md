@@ -18,6 +18,9 @@ npm run lint
 npm run build      # dist/ 생성
 ```
 
+결과 공유: 결과 화면의 **결과 공유하기**로 링크를 만들 수 있습니다. 링크에는 레벨 위치·국가·비교 집단·레어도·가장 빛나는 스탯만
+URL의 `#` 뒤에 담기고(서버로 전송되지 않음), 입력한 금액과 학력은 담기지 않습니다. 링크를 연 사람은 결과 카드와 "나도 내 레벨 확인하기" 버튼을 봅니다.
+
 디버그 모드: 주소 뒤에 `?debug=1`을 붙이면 버프 전 원값, z값, 중간 계산이 표시되고 버프를 끌 수 있습니다.
 
 ## 구조
@@ -33,9 +36,11 @@ src/
     calculate.ts       입력 → 결과 파이프라인 (원화→USD, 구매력 계수, 나이대 보정)
   form.ts              화면 입력 상태 ↔ 엔진 입력 변환
   format.ts            "N명 중 M명 안" 비율, 만원 표기, 국기
+  share.ts             공유 링크 인코딩·디코딩 (결과만, # fragment)
   hooks/useTween.ts    곡선 마커 부드러운 이동
   components/          InputPanel, RarityInput, CountryPicker, BellCurve, ResultCards,
-                       StatBars, RarityBadge, ResultSection, DebugPanel(lazy)
+                       StatBars, RarityBadge, ResultSection, ShareCard, ShareSheet,
+                       SharedView, DebugPanel(lazy)
   tests/
 ```
 

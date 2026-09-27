@@ -676,6 +676,241 @@ p {
   }
 }
 
+/* ---------- 공유 ---------- */
+
+.btn {
+  min-height: 46px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: transform 0.1s, background 0.15s;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  border-color: transparent;
+  background: linear-gradient(90deg, #7a68ff, #a07bff);
+  color: #fff;
+}
+
+.share-button {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(6, 5, 16, 0.72);
+  animation: fade-in 0.2s ease both;
+}
+
+.sheet {
+  width: min(480px, 100%);
+  max-height: 92dvh;
+  overflow-y: auto;
+  padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
+  border-radius: 20px 20px 0 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  animation: sheet-up 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}
+
+.sheet-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.sheet-head h2 {
+  font-size: 1.05rem;
+}
+
+.sheet-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  font-size: 0.9rem;
+}
+
+.sheet-note {
+  margin: 12px 2px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  word-break: keep-all;
+}
+
+.sheet-actions {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 8px;
+}
+
+.sheet-url {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 16px; /* iOS 확대 방지 */
+}
+
+.share-card {
+  position: relative;
+  padding: 18px 16px 14px;
+  border-radius: 20px;
+  border: 1px solid color-mix(in srgb, var(--tier) 45%, var(--line));
+  background:
+    radial-gradient(120% 70% at 100% 0%, color-mix(in srgb, var(--tier) 28%, transparent), transparent 60%),
+    linear-gradient(180deg, var(--panel-2), var(--panel));
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.share-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.share-world {
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.share-mode {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.share-card .rarity-badge {
+  font-size: 0.72rem;
+  padding: 3px 9px;
+}
+
+.share-level {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.share-lv {
+  font-size: 2.6rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.share-lv .lv {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-right: 3px;
+}
+
+.share-tier {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--tier);
+}
+
+.share-ratio {
+  margin-top: 6px;
+  font-weight: 600;
+  word-break: keep-all;
+}
+
+.share-ratio strong {
+  font-weight: 800;
+}
+
+.share-ratio .ratio-count {
+  color: var(--tier);
+}
+
+.share-card .bell-curve {
+  margin-top: 4px;
+}
+
+.share-facts {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.share-facts strong {
+  color: var(--text);
+}
+
+.share-card-foot {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-align: right;
+}
+
+.shared-layout {
+  display: grid;
+}
+
+.shared-view {
+  display: grid;
+  gap: 14px;
+}
+
+.shared-intro {
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.btn-cta {
+  width: 100%;
+  min-height: 52px;
+  font-size: 1rem;
+}
+
+@media (min-width: 900px) {
+  .shared-layout {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
 /* ---------- 디버그 ---------- */
 
 .debug-panel {

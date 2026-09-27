@@ -3,9 +3,12 @@ import { describe, expect, it } from 'vitest'
 import App from '../App'
 import InputPanel from '../components/InputPanel'
 import ResultSection, { EmptyGuide } from '../components/ResultSection'
+import SharedView from '../components/SharedView'
+import ShareSheet from '../components/ShareSheet'
 import { HOME_COUNTRY } from '../config'
 import { calculate, COUNTRY_CODES } from '../engine/calculate'
 import { initialForm, toCalcInput, type FormState } from '../form'
+import { toShareData } from '../share'
 
 /** 평가·판정 표현과 숨은 보정의 흔적 */
 const FORBIDDEN = /점수|순위|등수|하위|판정|버프|보정|buff/i
@@ -26,9 +29,12 @@ function renderAll(form: FormState): string {
   const result = calculate(input)
   const home = input.country !== HOME_COUNTRY ? calculate({ ...input, country: HOME_COUNTRY }) : null
   const noop = () => {}
+  const share = toShareData(form, result, home)
   return [
     renderToStaticMarkup(<InputPanel form={form} onChange={noop} />),
     renderToStaticMarkup(<ResultSection form={form} result={result} homeResult={home} onChange={noop} />),
+    renderToStaticMarkup(<ShareSheet data={share} onClose={noop} />),
+    renderToStaticMarkup(<SharedView data={share} onStart={noop} />),
   ].join('\n')
 }
 

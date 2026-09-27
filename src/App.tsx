@@ -1,17 +1,36 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import InputPanel from './components/InputPanel'
 import ResultSection, { EmptyGuide } from './components/ResultSection'
+import SharedView from './components/SharedView'
 import { APP_TITLE, BUFF, HOME_COUNTRY } from './config'
 import { calculate } from './engine/calculate'
 import { ratioLabel, tierInfo } from './format'
 import { initialForm, missingFields, toCalcInput, type FormState } from './form'
+import { decodeShare, type ShareData } from './share'
 
 // ?debug=1 일 때만 불러온다 — 일반 화면에는 흔적을 남기지 않는다
 const DebugPanel = lazy(() => import('./components/DebugPanel'))
 const DEBUG =
   typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('debug') === '1'
 
+function readShared(): ShareData | null {
+  return typeof window === 'undefined' ? null : decodeShare(window.location.hash)
+}
+
 export default function App() {
+  // 공유 링크(#v=1&...)로 들어오면 결과 카드부터 보여준다
+  const [shared, setShared] = useState<ShareData | null>(readShared)
+  useEffect(() => {
+    const onHash = () => setShared(readShared())
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
+  const startOwn = () => {
+    window.history.replaceState(null, '', window.location.pathname + window.location.search)
+    setShared(null)
+    window.scrollTo(0, 0)
+  }
+
   const [form, setForm] = useState<FormState>(initialForm)
   const [buffOn, setBuffOn] = useState(true)
   const update = (patch: Partial<FormState>) => setForm((f) => ({ ...f, ...patch }))
@@ -48,14 +67,20 @@ export default function App() {
         <p>내 스탯은 어느 레벨쯤일까? 다른 나라에선 어떨까?</p>
       </header>
 
-      <main className="layout">
-        <InputPanel form={form} onChange={update} />
-        {result ? (
-          <ResultSection ref={resultRef} form={form} result={result} homeResult={homeResult} onChange={update} />
-        ) : (
-          <EmptyGuide missing={missingFields(form)} />
-        )}
-      </main>
+      {shared ? (
+        <main className="shared-layout">
+          <SharedView data={shared} onStart={startOwn} />
+        </main>
+      ) : (
+        <main className="layout">
+          <InputPanel form={form} onChange={update} />
+          {result ? (
+            <ResultSection ref={resultRef} form={form} result={result} homeResult={homeResult} onChange={update} />
+          ) : (
+            <EmptyGuide missing={missingFields(form)} />
+          )}
+        </main>
+      )}
 
       {DEBUG && (
         <Suspense fallback={null}>
@@ -70,7 +95,7 @@ export default function App() {
 
       <footer className="disclaimer">재미를 위한 추정치예요. 실제 통계와 다를 수 있어요.</footer>
 
-      {result && !resultVisible && (
+      {!shared && result && !resultVisible && (
         <button
           type="button"
           className="level-hud"

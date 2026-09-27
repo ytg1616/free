@@ -1,13 +1,15 @@
-import type { Ref } from 'react'
+import { useCallback, useState, type Ref } from 'react'
 import { AGE_GROUPS, COMPARISONS, HOME_COUNTRY, MODES } from '../config'
 import { COUNTRIES } from '../engine/calculate'
 import type { CalcResult } from '../engine/types'
 import { flagOf, tierInfo } from '../format'
 import type { FormState } from '../form'
+import { toShareData } from '../share'
 import BellCurve from './BellCurve'
 import CountryPicker from './CountryPicker'
 import RarityBadge from './RarityBadge'
 import ResultCards from './ResultCards'
+import ShareSheet from './ShareSheet'
 import StatBars from './StatBars'
 
 interface Props {
@@ -20,6 +22,8 @@ interface Props {
 }
 
 export default function ResultSection({ form, result, homeResult, onChange, ref }: Props) {
+  const [sharing, setSharing] = useState(false)
+  const closeShare = useCallback(() => setSharing(false), [])
   const tier = tierInfo(result.composite.tier)
   const country = COUNTRIES[result.country]
   const away = result.country !== HOME_COUNTRY
@@ -65,7 +69,14 @@ export default function ResultSection({ form, result, homeResult, onChange, ref 
             <RarityBadge rarity={form.rarity} />
           </div>
         )}
+        <button type="button" className="btn share-button" onClick={() => setSharing(true)}>
+          🔗 결과 공유하기
+        </button>
       </div>
+
+      {sharing && (
+        <ShareSheet data={toShareData(form, result, homeResult)} onClose={closeShare} />
+      )}
 
       <div className="panel">
         <h2 className="section-title">스탯</h2>
