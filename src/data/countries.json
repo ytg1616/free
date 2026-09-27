@@ -1,0 +1,7 @@
+{
+  "KR": { "name": "대한민국", "medianIncome": 23000, "incomeGini": 0.36, "medianWealth": 90000, "wealthGini": 0.68, "pli": 0.63, "edu": [4, 7, 35, 15, 33, 5, 1], "verified": false },
+  "US": { "name": "미국", "medianIncome": 50000, "incomeGini": 0.41, "medianWealth": 108000, "wealthGini": 0.83, "pli": 1.0, "edu": [3, 6, 42, 10, 25, 11, 3], "verified": false },
+  "JP": { "name": "일본", "medianIncome": 26000, "incomeGini": 0.33, "medianWealth": 95000, "wealthGini": 0.65, "pli": 0.66, "edu": [1, 7, 38, 22, 26, 5, 1], "verified": false },
+  "VN": { "name": "베트남", "medianIncome": 3500, "incomeGini": 0.36, "medianWealth": 4500, "wealthGini": 0.70, "pli": 0.32, "edu": [30, 28, 22, 6, 12, 1.7, 0.3], "verified": false },
+  "ZW": { "name": "짐바브웨", "medianIncome": 1200, "incomeGini": 0.50, "medianWealth": 1000, "wealthGini": 0.75, "pli": 0.45, "edu": [38, 30, 22, 5, 4, 0.8, 0.2], "verified": false }
+}
