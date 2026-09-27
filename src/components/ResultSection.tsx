@@ -59,7 +59,7 @@ export default function ResultSection({ form, result, homeResult, onChange, ref 
               : null
           }
         />
-        <ResultCards composite={result.composite} />
+        <ResultCards composite={result.composite} group={group ?? ''} />
         {form.rarity && (
           <div className="badge-row">
             <RarityBadge rarity={form.rarity} />

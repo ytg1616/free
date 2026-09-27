@@ -1,7 +1,7 @@
 import { useId } from 'react'
 import { TIERS } from '../config'
 import { invPhi, phi } from '../engine/normal'
-import { topLabel } from '../format'
+import { ratioLabel, topRatio } from '../format'
 import { useTween } from '../hooks/useTween'
 
 interface Props {
@@ -61,7 +61,8 @@ export default function BellCurve({ p, color, baseline }: Props) {
   const meY = yOf(z)
   const fill = `M${f1(xOf(Z_MIN))},${BASE} L${curvePoints(z)} L${f1(meX)},${BASE} Z`
 
-  const label = `나 · ${topLabel(p)}`
+  const { total, count } = topRatio(p)
+  const label = `나 · ${total}명 중 ${count}명`
   const labelSize = 13
   const pillW = textWidth(label, labelSize) + 20
   const pillH = 26
@@ -103,7 +104,7 @@ export default function BellCurve({ p, color, baseline }: Props) {
       className="bell-curve"
       viewBox={`0 0 ${W} ${H}`}
       role="img"
-      aria-label={`분포 곡선 위 내 위치: ${topLabel(p)}${baseline ? `, ${baseline.label} ${topLabel(baseline.p)}` : ''}`}
+      aria-label={`분포 곡선 위 내 위치: ${ratioLabel(p)}${baseline ? `, ${baseline.label} ${ratioLabel(baseline.p)}` : ''}`}
     >
       <defs>
         <linearGradient id={gradId} x1="0" x2="0" y1="0" y2="1">

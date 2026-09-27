@@ -1,19 +1,21 @@
 import { TIERS } from './config'
 import type { CountryCode, TierKey } from './engine/types'
 
-function trimZero(s: string): string {
-  return s.endsWith('.0') ? s.slice(0, -2) : s
+/**
+ * 백분위 p → "total명 중 count명 안"의 숫자.
+ * 1000명 기준으로 한 자릿수(1~9명)일 때만 1000명, 그 외에는 100명 기준.
+ */
+export function topRatio(p: number): { total: number; count: number } {
+  const top = 1 - p
+  const perThousand = Math.round(top * 1000)
+  if (perThousand < 10) return { total: 1000, count: Math.max(1, perThousand) }
+  return { total: 100, count: Math.round(top * 100) }
 }
 
-/** 백분위 p → "상위 N%"의 N 부분. 10 이상은 정수, 그 아래는 소수 한 자리(최소 0.1) */
-export function topPercent(p: number): string {
-  const v = (1 - p) * 100
-  if (v >= 9.95) return `${Math.round(v)}%`
-  return `${trimZero(Math.max(0.1, Math.round(v * 10) / 10).toFixed(1))}%`
-}
-
-export function topLabel(p: number): string {
-  return `상위 ${topPercent(p)}`
+/** "1000명 중 8명 안" */
+export function ratioLabel(p: number): string {
+  const { total, count } = topRatio(p)
+  return `${total}명 중 ${count}명 안`
 }
 
 /** 만원 단위 숫자 → "1억 2,000만원" */

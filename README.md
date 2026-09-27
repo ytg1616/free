@@ -1,7 +1,7 @@
 # 평행세계 레벨 계산기
 
 내 스탯(소득·자산·학력·직업 레어도)이 어느 레벨쯤인지, 다른 나라에선 어떤지 확인하는 **재미용** 웹앱입니다.
-사람을 평가하는 도구가 아니며, 결과는 레벨·티어·"상위 N%"로만 표현합니다.
+사람을 평가하는 도구가 아니며, 결과는 레벨·티어·"1000명 중에 8명 안에 들어요" 같은 비율로만 표현합니다.
 
 - 모든 계산은 브라우저 안에서만 합니다. 서버 전송·저장·localStorage를 쓰지 않습니다.
 - 국가 데이터는 전부 **임시 대략치**입니다(`verified: false`). 실제 통계가 아닙니다.
@@ -31,7 +31,7 @@ src/
     composite.ts       종합 z, 버프, 레벨, 티어
     calculate.ts       입력 → 결과 파이프라인 (원화→USD, 구매력 계수, 나이대 보정)
   form.ts              화면 입력 상태 ↔ 엔진 입력 변환
-  format.ts            "상위 N%", 만원 표기, 국기
+  format.ts            "N명 중 M명 안" 비율, 만원 표기, 국기
   hooks/useTween.ts    곡선 마커 부드러운 이동
   components/          InputPanel, RarityInput, CountryPicker, BellCurve, ResultCards,
                        StatBars, RarityBadge, ResultSection, DebugPanel(lazy)

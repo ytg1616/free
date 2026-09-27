@@ -3,7 +3,7 @@ import InputPanel from './components/InputPanel'
 import ResultSection, { EmptyGuide } from './components/ResultSection'
 import { APP_TITLE, BUFF, HOME_COUNTRY } from './config'
 import { calculate } from './engine/calculate'
-import { tierInfo, topLabel } from './format'
+import { ratioLabel, tierInfo } from './format'
 import { initialForm, missingFields, toCalcInput, type FormState } from './form'
 
 // ?debug=1 일 때만 불러온다 — 일반 화면에는 흔적을 남기지 않는다
@@ -79,7 +79,7 @@ export default function App() {
         >
           <span>
             <strong>Lv.{result.composite.level}</strong> {tierInfo(result.composite.tier).name} ·{' '}
-            {topLabel(result.composite.p)}
+            {ratioLabel(result.composite.p)}
           </span>
           <span className="hud-cta">결과 보기 ↓</span>
         </button>

@@ -463,7 +463,7 @@ p {
 
 .result-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
   margin-top: 10px;
 }
@@ -491,6 +491,25 @@ p {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
   line-height: 1.3;
+}
+
+.ratio-card {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 12px;
+  font-size: 1.02rem;
+  font-weight: 600;
+  word-break: keep-all;
+}
+
+.ratio-card strong {
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.ratio-card .ratio-count {
+  color: var(--tier);
+  font-size: 1.3rem;
 }
 
 .result-value .lv {

@@ -1,6 +1,6 @@
 import { STAT_LABELS } from '../config'
 import type { CalcResult, StatKey } from '../engine/types'
-import { topLabel } from '../format'
+import { ratioLabel } from '../format'
 
 const ORDER: StatKey[] = ['income', 'wealth', 'education']
 
@@ -23,7 +23,7 @@ export default function StatBars({ result }: { result: CalcResult }) {
                 {STAT_LABELS[key]}
                 {brightest && <span className="shine">✨ 가장 빛나는 스탯</span>}
               </span>
-              <span className="stat-value">{s.locked ? '잠긴 스탯' : topLabel(s.p)}</span>
+              <span className="stat-value">{s.locked ? '잠긴 스탯' : ratioLabel(s.p)}</span>
             </div>
             <div className="bar" aria-hidden="true">
               {!s.locked && <div className="bar-fill" style={{ width: `${s.p * 100}%` }} />}

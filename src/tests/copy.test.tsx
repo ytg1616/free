@@ -44,7 +44,7 @@ describe('UI 문구', () => {
         for (const noIncome of [false, true]) {
           const html = renderAll({ ...filled, country, mode, noIncome })
           expect(html).not.toMatch(FORBIDDEN)
-          expect(html).toContain('상위')
+          expect(html).toMatch(/\d+명 중에? .*\d+명/)
         }
       }
     }
