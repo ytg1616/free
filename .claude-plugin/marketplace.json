@@ -1,0 +1,11 @@
+{
+  "name": "ytg1616-free",
+  "owner": { "name": "ytg1616" },
+  "plugins": [
+    {
+      "name": "soundtrack-dex",
+      "source": "./plugins/soundtrack-dex",
+      "description": "Claude Code가 일하는 동안 들은 Spotify 곡을 모으는 코딩 사운드트랙 도감"
+    }
+  ]
+}

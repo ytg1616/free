@@ -1,0 +1,7 @@
+{
+  "name": "soundtrack-dex",
+  "version": "0.1.0",
+  "description": "Claude Code가 일하는 동안 들은 Spotify 곡을 도감에 모으고, 함께 코딩한 날 수만큼 곡 카드가 진화한다.",
+  "author": { "name": "ytg1616" },
+  "keywords": ["spotify", "statusline", "music"]
+}
